@@ -29,32 +29,21 @@ const slideshow = [
 // Add click event listeners to arrows
 arrowleft.addEventListener("click", function () {
   clickCheck(event);
-  arrowIndex = arrowIndex + 1;
+  arrowIndex = (arrowIndex - 1 + slideshow.length) % slideshow.length;
   updateContent();
-  updateSelectedDot();
+  updateDots();
 });
 
 arrowright.addEventListener("click", function () {
   clickCheck(event);
-  arrowIndex = arrowIndex - 1;
+  arrowIndex = (arrowIndex + 1) % slideshow.length;
   updateContent();
-  updateSelectedDot();
+  updateDots();
 });
 
 // Function to check if addEventListener(click) works
 function clickCheck(event) {
   console.log("Button clicked:", event.target);
-}
-
-// Update dots
-function updateSelectedDot() {
-  dots.forEach((dot, index) => {
-    dot.classList.remove("dot_selected");
-    if (index === slideshow.length - arrowIndex) {
-      // Adjusted index calculation
-      dot.classList.add("dot_selected");
-    }
-  });
 }
 
 // Function to update the src and text based on the current index
@@ -70,5 +59,15 @@ function updateContent() {
     }
     srcImg.src = "./assets/images/slideshow/" + slideshow[arrowIndex].image;
     textElement.innerHTML = slideshow[arrowIndex].text;
+  }
+}
+// Fuction to update the dots based on arrowindex and slidshow
+function updateDots() {
+  for (let i = 0; i < dots.length; i++) {
+    if (i === arrowIndex) {
+      dots[i].classList.add("dot_selected");
+    } else {
+      dots[i].classList.remove("dot_selected");
+    }
   }
 }
