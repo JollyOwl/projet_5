@@ -1,1 +1,5 @@
-# Print-It WebSite v.1
+# Print-It WebSite -
+
+Open Classroom project by sarah-Sophie Thouabtia
+
+
