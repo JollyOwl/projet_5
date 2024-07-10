@@ -27,16 +27,24 @@ const slideshow = [
 ];
 
 // Add click event listeners to arrows
-arrowleft.addEventListener("click", function () {
+arrowleft.addEventListener("click", function (event) {
   clickCheck(event);
-  arrowIndex = (arrowIndex - 1 + slideshow.length) % slideshow.length;
+  if (arrowIndex > 0) {
+    arrowIndex--;
+  } else {
+    arrowIndex = slideshow.length - 1;
+  }
   updateContent();
   updateDots();
 });
 
-arrowright.addEventListener("click", function () {
+arrowright.addEventListener("click", function (event) {
   clickCheck(event);
-  arrowIndex = (arrowIndex + 1) % slideshow.length;
+  if (arrowIndex < slideshow.length - 1) {
+    arrowIndex++;
+  } else {
+    arrowIndex = 0;
+  }
   updateContent();
   updateDots();
 });
@@ -61,7 +69,8 @@ function updateContent() {
     textElement.innerHTML = slideshow[arrowIndex].text;
   }
 }
-// Fuction to update the dots based on arrowindex and slidshow
+
+// Function to update the dots based on arrowIndex and slideshow
 function updateDots() {
   for (let i = 0; i < dots.length; i++) {
     if (i === arrowIndex) {
